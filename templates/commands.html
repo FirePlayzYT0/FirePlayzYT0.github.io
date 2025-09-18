@@ -1,0 +1,206 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="commands-container">
+    <div class="commands-header">
+        <h1>Command Management</h1>
+        <div class="header-actions">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search commands..." id="commandSearch">
+            </div>
+            <button class="btn-primary" onclick="refreshCommands()">
+                <i class="fas fa-sync-alt"></i>
+                Refresh
+            </button>
+        </div>
+    </div>
+
+    <div class="commands-content">
+        <div class="commands-stats">
+            <div class="stat-card">
+                <i class="fas fa-terminal"></i>
+                <div class="stat-info">
+                    <h3 id="totalCommands">0</h3>
+                    <p>Total Commands</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-bolt"></i>
+                <div class="stat-info">
+                    <h3 id="commandsToday">0</h3>
+                    <p>Today's Usage</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-star"></i>
+                <div class="stat-info">
+                    <h3 id="topCommand">-</h3>
+                    <p>Most Used</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="commands-grid">
+            <div class="commands-section">
+                <h3>Music Commands</h3>
+                <div class="commands-list" id="musicCommands">
+                    <!-- Music commands will be loaded here -->
+                </div>
+            </div>
+
+            <div class="commands-section">
+                <h3>Utility Commands</h3>
+                <div class="commands-list" id="utilityCommands">
+                    <!-- Utility commands will be loaded here -->
+                </div>
+            </div>
+
+            {% if is_whitelisted %}
+            <div class="commands-section">
+                <h3>GG Commands (Whitelisted)</h3>
+                <div class="commands-list" id="ggCommands">
+                    <!-- GG commands will be loaded here -->
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<style>
+.commands-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.commands-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.commands-header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.header-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.commands-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.commands-grid {
+    display: grid;
+    gap: 2rem;
+}
+
+.commands-section h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--primary);
+}
+
+.commands-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+.command-item {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 1rem;
+    transition: var(--transition);
+}
+
+.command-item:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+    border-color: var(--primary);
+}
+
+.command-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.command-name {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+}
+
+.command-usage {
+    background: rgba(88, 101, 242, 0.2);
+    color: var(--primary);
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.command-description {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.command-aliases {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    margin-top: 0.5rem;
+}
+
+.command-alias {
+    background: rgba(79, 84, 92, 0.3);
+    color: var(--text-secondary);
+    padding: 0.2rem 0.5rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-family: 'Courier New', monospace;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .commands-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .header-actions {
+        justify-content: space-between;
+    }
+    
+    .commands-list {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+<script>
+// This would be filled with actual JavaScript to load commands
+// For now, it's a placeholder structure
+</script>
+{% endblock %}
